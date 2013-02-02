@@ -1,0 +1,5 @@
+<% reply = Reply.new %>
+<%= form_for [@topic, reply], :remote => true do |f| %>
+	<%= f.text_area :body %>
+	<%= f.submit "Submit", :disable_with => 'Submiting...' %>
+<% end %>

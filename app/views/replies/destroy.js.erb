@@ -1,0 +1,2 @@
+$('#replies_count').html("<%= @topic.replies_count.to_i - 1 %>");
+$('#<%= dom_id(@reply) %>').fadeOut();

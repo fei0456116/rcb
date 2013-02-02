@@ -1,0 +1,31 @@
+<% cache [@topic, 'show'] do %>
+	<div class="box clearfix">
+		<div class="topic_show">
+			<%= render @topic %>
+		</div>
+		
+		<div class="btns pull-right" data-user="<%= @topic.user.id %>" style='display: none'>
+			<%= link_to 'Edit', [:edit, @topic] %>
+			<%= link_to 'Destroy', @topic, :method => :delete, :remote => true %>
+		</div>
+		
+		<div class="topic_content">
+			<%= markdown @topic.body %>
+		</div>
+	</div>	
+	
+	<% if @topic.replies_count == 0 %>
+		<div class="no_replay center box"><h3>No replies</h3></div>
+		<div class="box hidden" id='replies' >
+			<div>共收到 <span id="replies_count"><%= @topic.replies_count %></span> 条回复</div>
+		</div>
+	<% else %>	
+		<div class="box" id='replies'>
+			<div>共收到 <span id="replies_count"><%= @topic.replies_count %></span> 条回复</div>
+			<%= render @topic.replies %>
+		</div>
+	<% end %>
+	
+	<%= render 'replies/new' %>
+	
+<% end %>

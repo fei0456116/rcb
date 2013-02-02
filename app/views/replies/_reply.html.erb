@@ -1,0 +1,31 @@
+<% cache reply do %>
+	<div class="reply clearfix" id='<%= dom_id(reply) %>'>
+		<div class="face pull-left">
+			<%= link_to image_tag('a.png', :width => "48px"), '#' %>
+		</div>
+		<div class="rightinfo">
+			<div class="reply_contaienr">
+				<div class="btns pull-right" style='display: none' data-user="<%= reply.user.id %>">
+					<%= link_to "edit", '#', class: "edit_reply_link", :'data-turbolinks-track' => true %>
+					<%= link_to "destroy", [reply.topic, reply], :method => :delete, :remote => true , :'data-turbolinks-track' => true %>
+				</div>
+				<div class="info">
+					<%= link_to reply.user.email, '#' %>
+					<abbr class="timeago" title="<%= reply.created_at.to_time.iso8601 %>"></abbr>
+				</div>
+
+				<div class="markdown">
+					<%= markdown reply.body %>
+				</div>
+			</div>
+			
+			<div class="edit" data-user='<%= reply.user.id %>' style='display: none'>
+				<%= simple_form_for [@topic, reply], :remote => true do |f| %>
+					<%= f.text_area :body %>
+					<%= f.submit "Submit", :disable_with => 'Submiting...' %>
+					<a href="#" class="cancel_edit_reply" data-turbolinks-track>Cancel</a>
+				<% end %>
+			</div>
+		</div>
+	</div>
+<% end %>

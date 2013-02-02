@@ -1,0 +1,12 @@
+<%= simple_form_for(@topic, :remote => true) do |f| %>
+	<div class="row">
+		<div class="span3"><%= f.input :node_id, :as => :select, :collection => Node.all  %></div>
+		<div class="span9"><%= f.input :title %></div>
+	</div>
+	
+	<%= f.input :body %>
+	
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

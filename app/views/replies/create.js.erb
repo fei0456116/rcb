@@ -1,0 +1,6 @@
+$('.no_replay').remove();
+$('#replies').removeClass('hidden');
+$('#replies').append('<%= j render @reply %>');
+$('#replies_count').html("<%= @topic.replies_count + 1 %>");
+$('form#new_reply').get(0).reset();
+$('#<%= dom_id(@reply) %>').find('.btns').show();
